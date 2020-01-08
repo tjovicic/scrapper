@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  scrapper:
+    build: .
+    command: npm run dev
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app/
+    environment:
+      - USERNAME=tiho
+      - PASSWORD=tiho
+    depends_on:
+      - chrome
+      - torproxy
+
+  chrome:
+    image: browserless/chrome
+    ports:
+      - 3000:3000
+
+  torproxy:
+    image: dperson/torproxy
